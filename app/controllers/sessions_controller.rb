@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       flash[:success] = "ログインしました"
       params[:session][:remember_me] == "1" ? remember(@user) : forget(@user)
       log_in @user
-      redirect_to @user
+      redirect_back_or @user
     else
       flash.now[:danger] = "メールアドレスとパスワードを確認してください"
       render "new"
