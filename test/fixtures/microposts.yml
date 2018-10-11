@@ -3,15 +3,26 @@
 orange:
   content: "I ate an orange."
   created_at: <%= 10.minutes.ago %>
+  user: michael
 
 tau:
   content: "check out!"
   created_at: <%= 3.years.ago %>
+  user: michael
 
 cat:
   content: "pretty cats"
   created_at: <%= 2.hours.ago %>
+  user: michael
 
 most_recent:
   content: "most recent!"
   created_at: <%= Time.zone.now %>
+  user: michael
+
+<% 30.times do |n| %>
+micropost_<%= n %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= 42.days.ago %>
+  user: michael
+<% end %>
