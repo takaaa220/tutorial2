@@ -26,3 +26,24 @@ micropost_<%= n %>:
   created_at: <%= 42.days.ago %>
   user: michael
 <% end %>
+
+ants:
+  content: "oh!"
+  created_at: <%= 2.years.ago %>
+  user: archer
+
+zone:
+  content: "Danger!"
+  created_at: <%= 3.days.ago %>
+  user: archer
+
+tone:
+  content: "I am sorry."
+  created_at: <%= 10.minutes.ago %>
+  user: lana
+
+van:
+  content: "Dude"
+  created_at: <%= 4.hours.ago %>
+  user: lana
+  
