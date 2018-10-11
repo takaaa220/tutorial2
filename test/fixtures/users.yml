@@ -27,6 +27,11 @@ malory:
   activated: true
   activated_at: <%= Time.zone.now %>
 
+# takashi:
+#   name: takashi
+#   email: taka@example.com
+#   password_digest: <%= User.digest("password") %>
+
 <% 30.times do |n| %>
 user_<%= n %>:
   name: <%= "User #{n}" %>
