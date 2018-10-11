@@ -1,9 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  content: MyText
-  user: one
+orange:
+  content: "I ate an orange."
+  created_at: <%= 10.minutes.ago %>
 
-two:
-  content: MyText
-  user: two
+tau:
+  content: "check out!"
+  created_at: <%= 3.years.ago %>
+
+cat:
+  content: "pretty cats"
+  created_at: <%= 2.hours.ago %>
+
+most_recent:
+  content: "most recent!"
+  created_at: <%= Time.zone.now %>
