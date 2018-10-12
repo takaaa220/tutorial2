@@ -11,7 +11,7 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
 
   test "destroy require logged-in user" do
     assert_no_difference "Like.count" do
-      delete like_path(likes(:one))
+      delete like_path(likes(:two))
     end
     assert_redirected_to login_url
   end
