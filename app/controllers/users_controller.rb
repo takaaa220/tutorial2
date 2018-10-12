@@ -22,6 +22,11 @@ class UsersController < ApplicationController
     render "show_follow"
   end
 
+  def likes
+    @user = User.find(params[:id])
+    @likes = @user.likes.paginate(page: params[:page])
+  end
+
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])

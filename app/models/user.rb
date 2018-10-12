@@ -91,6 +91,11 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def likes
+    post_ids = "SELECT micropost_id FROM likes WHERE user_id = :id"
+    Micropost.where("id IN (#{post_ids})", id: id)
+  end
+
   private
 
     def downcase_email
