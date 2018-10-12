@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 /* mixins, variables, etc. */
 
@@ -291,5 +292,24 @@ span.picture {
   margin-top: 10px;
   input {
     border: 0;
+  }
+}
+
+.yes
+{
+  color: #ea3333;
+}
+
+.no
+{
+  color: $gray-light;
+}
+
+.iine_form
+{
+  margin-right: 20px;
+  button {
+    background: none;
+    border: none;
   }
 }

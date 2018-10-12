@@ -29,4 +29,14 @@ class MicropostTest < ActiveSupport::TestCase
   test "order should be most recent first" do
     assert_equal microposts(:most_recent), Micropost.first
   end
+
+  test "should like and unlike a micropost" do
+    michael = users(:michael)
+    zone = microposts(:zone)
+    assert_not zone.iine?(michael)
+    zone.iine(michael)
+    assert zone.iine?(michael)
+    zone.uuun(michael)
+    assert_not zone.iine?(michael)
+  end
 end
