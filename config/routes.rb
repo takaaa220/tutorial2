@@ -9,12 +9,12 @@ Rails.application.routes.draw do
   delete "logout" => "sessions#destroy"
   resources :users do
     member do
-      get :following, :followers, :likes # users/:id/following or follower or likes
+      get :following, :followers, :likes # users/:id/***
     end
   end
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :microposts, only: [:show, :create, :destroy]
+  resources :microposts, only: [:index, :show, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
 end

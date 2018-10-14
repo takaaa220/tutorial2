@@ -33,8 +33,14 @@ class Micropost < ApplicationRecord
   #   where("in_reply_to = ? OR in_reply_to = ? OR user_id = ?", id, 0, id)
   #   # where(in_reply_to: [id, 0]).or(Micropost.where(user_id: id))
   # end
-  def Micropost.including_replies(id)
+  def self.including_replies(id)
     where("in_reply_to = ?", id)
+  end
+
+  def self.search(word)
+    if word
+      where("content LIKE ?", "%#{word}%")
+    end
   end
 
   private
