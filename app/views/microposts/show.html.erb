@@ -1,0 +1,32 @@
+<% provide(:title, "#{@post.user.name}のTweet") %>
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render "shared/user_info" %>
+      </section>
+      <section class="stats">
+        <%= render "shared/stats" %>
+      </section>
+      <section class="micropost_form">
+        <%= render "shared/micropost_form" %>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3>Reply <%= @post.user.name %>'s tweet</h3>
+      <div class="tweet">
+        <div class="tweet-user">
+          <%= link_to gravatar_for(@post.user, size: 50), @post.user %>
+          <span class="user"><%= link_to @post.user.name, @post.user %></span>
+        </div>
+        <div class="tweet-content">
+          <%= @post.content %>
+          <%= image_tag @post.picture.url if @post.picture? %>
+        </div>
+        <span class="timestamp">
+          Posted <%= time_ago_in_words(@post.created_at) %> ago.
+        </span>
+      </div>
+    </div>
+  </div>
+<% end %>

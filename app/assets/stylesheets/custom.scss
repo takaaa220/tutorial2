@@ -327,3 +327,33 @@ span.picture {
     margin-right: 30px;
   }
 }
+
+.tweet {
+  height: 300px;
+  padding: 20px;
+  border: 1px solid $gray-lighter;
+  position: relative;
+  .tweet-user
+  {
+    padding-bottom: 10px;
+    width: 100%;
+    display: inline-block;
+    border-bottom: 1px solid $gray-medium-light;
+  }
+  .user{
+    margin-left: 20px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+  }
+  .tweet-content
+  {
+    padding: 20px 0;
+    font-size: 28px;
+  }
+  .timestamp
+  {
+    position: absolute;
+    bottom: 20px;
+  }
+}
