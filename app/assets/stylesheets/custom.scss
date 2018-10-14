@@ -305,11 +305,25 @@ span.picture {
   color: $gray-light;
 }
 
-.iine_form
-{
-  margin-right: 20px;
+.iine{
   button {
     background: none;
     border: none;
+    &:active {
+      box-shadow: 0;
+      border: none;
+    }
+  }
+
+}
+
+.flex {
+  display: flex;
+  padding: 5px 0;
+}
+.post {
+  i {
+    font-size: 20px;
+    margin-right: 30px;
   }
 }
