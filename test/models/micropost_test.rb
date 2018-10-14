@@ -39,4 +39,16 @@ class MicropostTest < ActiveSupport::TestCase
     zone.uuun(michael)
     assert_not zone.iine?(michael)
   end
+
+  test "should set not 0 in reply to when @username exists" do
+    @post = microposts(:michael_post)
+    @to_user = users(:archer)
+    assert_equal @post.in_reply_to, 0
+    @post.content = "@#{@to_user.name} aaa"
+    @post.set_in_reply_to
+    assert_equal @post.in_reply_to, @to_user.id
+    @post.content = "fdjfdfd"
+    @post.set_in_reply_to
+    assert_equal @post.in_reply_to, 0
+  end
 end

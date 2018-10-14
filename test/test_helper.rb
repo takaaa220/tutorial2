@@ -15,6 +15,12 @@ class ActiveSupport::TestCase
   def log_in_as(user)
     session[:user_id] = user.id
   end
+
+  # micropostにuserがReplyする
+  def reply(micropost)
+    micropost.content = "@#{micropost.user.name} reply"
+    micropost.set_in_reply_to
+  end
 end
 
 

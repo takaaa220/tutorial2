@@ -5,6 +5,11 @@ orange:
   created_at: <%= 10.minutes.ago %>
   user: michael
 
+michael_post:
+  content: "@archer aaa"
+  created_at: <%= 11.minutes.ago %>
+  user: michael
+
 tau:
   content: "check out!"
   created_at: <%= 3.years.ago %>
@@ -45,5 +50,4 @@ tone:
 van:
   content: "Dude"
   created_at: <%= 4.hours.ago %>
-  user: lana
-  
+  user: takashi

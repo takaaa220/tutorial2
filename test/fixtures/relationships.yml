@@ -13,3 +13,7 @@ three:
 four:
   follower: archer
   followed: michael
+
+five:
+  follower: takashi
+  followed: take

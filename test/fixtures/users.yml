@@ -27,10 +27,26 @@ malory:
   activated: true
   activated_at: <%= Time.zone.now %>
 
-# takashi:
-#   name: takashi
-#   email: taka@example.com
-#   password_digest: <%= User.digest("password") %>
+takashi:
+  name: takashi
+  email: taka@example.com
+  password_digest: <%= User.digest("password") %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+take:
+  name: take
+  email: take@example.com
+  password_digest: <%= User.digest("password") %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+taki:
+  name: taki
+  email: taki@example.com
+  password_digest: <%= User.digest("password") %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 <% 30.times do |n| %>
 user_<%= n %>:
