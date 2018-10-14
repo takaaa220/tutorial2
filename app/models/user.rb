@@ -14,7 +14,10 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_create :create_activation_digest
 
-  validates :name, { presence: true, uniqueness: true, length: { maximum: 50} }
+  # VALID_NAME_REGEX = /\A(?!.*\s).*\z/u
+  VALID_NAME_REGEX = /\A[\w-]+\z/
+  validates :name, { presence: true, uniqueness: true,
+    length: { maximum: 50}, format: { with: VALID_NAME_REGEX }}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i # 大文字スタートは定数
   validates :email, { presence: true, uniqueness: { case_sensitive: false } ,
     length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX } }

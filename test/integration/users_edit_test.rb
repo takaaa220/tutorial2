@@ -13,7 +13,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     patch user_path(@user), params: { user: { name: "", email: "",
           password: "foo", password_confirmation: "bar" }}
     assert_template "users/edit"
-    assert_select "div.alert", "The form contains 5 errors."
+    assert_select "div.alert", "The form contains 6 errors."
   end
 
   test "successful edit" do
@@ -35,7 +35,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     get edit_user_path(@user)
     log_in_as(@user)
     assert_redirected_to edit_user_url(@user)
-    name = "Foo bar"
+    name = "Foobar"
     email = "foo@bar.com"
     patch user_path(@user), params: { user: { name: name, email: email,
                             password: "", password_confirmation: "" }}
