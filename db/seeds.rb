@@ -25,3 +25,11 @@ following = users[2..50]
 followers = users[3..50]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# リツイート
+user2 = User.second
+for num in 1..50 do
+  if micropost = Micropost.find_by(id: num)
+    micropost.retweet(user2)
+  end
+end

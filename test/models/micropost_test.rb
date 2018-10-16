@@ -40,15 +40,23 @@ class MicropostTest < ActiveSupport::TestCase
     assert_not zone.iine?(michael)
   end
 
-  test "should set not 0 in reply to when @username exists" do
-    @post = microposts(:michael_post)
-    @to_user = users(:archer)
-    assert_equal @post.in_reply_to, 0
-    @post.content = "@#{@to_user.name} aaa"
-    @post.set_in_reply_to
-    assert_equal @post.in_reply_to, @to_user.id
-    @post.content = "fdjfdfd"
-    @post.set_in_reply_to
-    assert_equal @post.in_reply_to, 0
+  test "should retweet and unretweet a micropost" do
+    michael = users(:michael)
+    zone = microposts(:zone)
+    assert_not zone.retweet?(michael)
+    zone.retweet(michael)
+    assert zone.retweet?(michael)
+    zone.unretweet(michael)
+    assert_not zone.retweet?(michael)
   end
+  # test "should set not 0 in reply to when @username exists" do
+  #   @post = microposts(:michael_post)
+  #   @to_user = users(:archer)
+  #   assert_equal @post.in_reply_to, 0
+  #   @post.content = "@#{@to_user.name} aaa"
+  #   assert_equal @post.in_reply_to, @to_user.id
+  #   @post.content = "fdjfdfd"
+  #   @post.set_in_reply_to
+  #   assert_equal @post.in_reply_to, 0
+  # end
 end

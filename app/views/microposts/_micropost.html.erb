@@ -10,6 +10,7 @@
   </span>
   <div class="flex">
     <%= render("likes/iine_form", micropost: micropost) if logged_in? %>
+    <%= render("shares/retweet_form", micropost: micropost) if logged_in? %>
     <%= link_to(micropost_path(micropost)) do %>
       <%= content_tag :i, "", class: "fas fa-reply" %>
     <% end %>

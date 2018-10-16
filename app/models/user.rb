@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   has_many :likes, dependent: :destroy
+  has_many :shares, dependent: :destroy
 
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
@@ -75,19 +76,14 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago # 2時間より前ならTrue
   end
 
+  # followしている人のツイートとリツイート，リツイートしたツイート，自分のツイートをFeedとする
   def feed
-    following_ids = "SELECT followed_id FROM relationships
-                    WHERE follower_id = :user_id"
-    Micropost.including_replies(id).or(Micropost.where("user_id IN (#{following_ids})
-                   OR user_id = :user_id", user_id: id))
+    # self_and_following_ids = ":user_id, (SELECT followed_id FROM relationships
+    #                 WHERE follower_id = :user_id)"
+    # self_and_following_retweets_ids = "SELECT micropost_id FROM shares WHERE user_id IN (#{self_and_following_ids})"
+    Micropost.including_replies(id).or(Micropost.where("user_id IN (#{get_self_and_following_ids})
+            OR id IN (#{get_self_and_following_retweets_ids})", user_id: id))
   end
-  # def feed
-  #   following_ids = "SELECT followed_id FROM relationships
-  #                    WHERE follower_id = :user_id"
-  #   Micropost.including_replies(id)
-  #            .where("user_id IN (#{following_ids})
-  #                    OR user_id = :user_id", user_id: id)
-  # end
 
   def follow(other_user)
     following << other_user
@@ -102,8 +98,16 @@ class User < ApplicationRecord
   end
 
   def likes
-    post_ids = "SELECT micropost_id FROM likes WHERE user_id = :id"
-    Micropost.where("id IN (#{post_ids})", id: id)
+    post_ids = "SELECT micropost_id FROM likes WHERE user_id = :user_id"
+    Micropost.where("id IN (#{post_ids})", user_id: id)
+  end
+
+  # user.microposts を user.get_microposts に代用して，リツイートした投稿も含める
+  def get_microposts
+    # self_and_following_ids = ":user_id, (SELECT followed_id FROM relationships
+    #                 WHERE follower_id = :user_id)"
+    # self_and_following_retweets_ids = "SELECT micropost_id FROM shares WHERE user_id IN (#{self_and_following_ids})"
+    Micropost.where("user_id = :user_id OR id IN (#{get_self_and_following_retweets_ids})", user_id: id)
   end
 
   private
@@ -115,5 +119,13 @@ class User < ApplicationRecord
     def create_activation_digest
       self.activation_token = User.new_token
       self.activation_digest = User.digest(activation_token)
+    end
+
+    def get_self_and_following_ids
+      ":user_id, (SELECT followed_id FROM relationships WHERE follower_id = :user_id)"
+    end
+
+    def get_self_and_following_retweets_ids
+      "SELECT micropost_id FROM shares WHERE user_id IN (#{get_self_and_following_ids})"
     end
 end

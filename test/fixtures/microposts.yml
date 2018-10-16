@@ -51,3 +51,8 @@ van:
   content: "Dude"
   created_at: <%= 4.hours.ago %>
   user: takashi
+
+oh:
+  content: "take"
+  created_at: <%= 5.hours.ago %>
+  user: takashi

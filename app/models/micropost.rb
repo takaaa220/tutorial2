@@ -1,6 +1,7 @@
 class Micropost < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
+  has_many :shares, dependent: :destroy
   has_many :iine_users, through: :likes, source: :user
 
   default_scope -> { order(created_at: :desc) }
@@ -29,12 +30,21 @@ class Micropost < ApplicationRecord
     iine_users.include?(user)
   end
 
-  # def self.including_replies(id)
-  #   where("in_reply_to = ? OR in_reply_to = ? OR user_id = ?", id, 0, id)
-  #   # where(in_reply_to: [id, 0]).or(Micropost.where(user_id: id))
-  # end
-  def self.including_replies(id)
-    where("in_reply_to = ?", id)
+  def retweet(user)
+    shares.create(user_id: user.id)
+  end
+
+  def unretweet(user)
+    shares.find_by(user_id: user.id).destroy
+  end
+
+  def retweet?(user)
+    !shares.find_by(user_id: user.id).nil?
+  end
+
+  # 返信されたUserを探す
+  def self.including_replies(user_id)
+    where("in_reply_to = ?", user_id)
   end
 
   def self.search(word)

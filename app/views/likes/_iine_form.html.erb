@@ -1,4 +1,4 @@
-<div class="iine">
+<div class="share">
   <% if micropost.iine?(current_user) %>
     <%= form_for(micropost.likes.find_by(user_id: current_user.id),
                   html: { method: :delete }, remote: true) do |f| %>
